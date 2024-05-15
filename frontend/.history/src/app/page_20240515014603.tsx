@@ -1,5 +1,3 @@
-import { HeroSection } from "@/components/custom/HeroSection";
-import { flattenAttributes } from "@/lib/utils";
 import qs from "qs";
 
 const homePageQuesry = qs.stringify({
@@ -19,17 +17,10 @@ const homePageQuesry = qs.stringify({
 
 async function getStrapiData(path: string) {
   const baseUrl = "http://127.0.0.1:1337";
-
-  const url = new URL(path, baseUrl);
-  url.search = homePageQuesry;
-  // console.log(url.href);
-
   try {
-    const response = await fetch(url.href, { cache: "no-store" });
+    const response = await fetch(baseUrl + path);
     const data = await response.json();
-    const flattenData = flattenAttributes(data);
-    // console.dir(flattenData, { depth: null });
-    return flattenData;
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -38,11 +29,12 @@ async function getStrapiData(path: string) {
 export default async function Home() {
   const strapiData = await getStrapiData("/api/home-page");
 
-  const { title, description, blocks } = strapiData;
+  const { title, description } = strapiData.data.attributes;
 
   return (
-    <main>
-      <HeroSection data={blocks[0]} />
+    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+      <h1>{title}</h1>
+      <p>{description}</p>
     </main>
   );
 }

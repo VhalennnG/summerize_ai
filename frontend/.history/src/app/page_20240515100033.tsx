@@ -22,13 +22,15 @@ async function getStrapiData(path: string) {
 
   const url = new URL(path, baseUrl);
   url.search = homePageQuesry;
+
   // console.log(url.href);
 
   try {
-    const response = await fetch(url.href, { cache: "no-store" });
+    const response = await fetch(url.href);
     const data = await response.json();
     const flattenData = flattenAttributes(data);
-    // console.dir(flattenData, { depth: null });
+    console.dir(flattenData, { depth: null });
+
     return flattenData;
   } catch (error) {
     console.error(error);
@@ -38,7 +40,7 @@ async function getStrapiData(path: string) {
 export default async function Home() {
   const strapiData = await getStrapiData("/api/home-page");
 
-  const { title, description, blocks } = strapiData;
+  const { title, description, image, blocks } = strapiData;
 
   return (
     <main>

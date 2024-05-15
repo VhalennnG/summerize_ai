@@ -18,7 +18,7 @@ const homePageQuesry = qs.stringify({
 });
 
 async function getStrapiData(path: string) {
-  const baseUrl = "http://127.0.0.1:1337";
+  const baseUrl = "http://localhost:1337";
 
   const url = new URL(path, baseUrl);
   url.search = homePageQuesry;

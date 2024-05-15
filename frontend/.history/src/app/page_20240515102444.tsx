@@ -22,6 +22,7 @@ async function getStrapiData(path: string) {
 
   const url = new URL(path, baseUrl);
   url.search = homePageQuesry;
+
   // console.log(url.href);
 
   try {
@@ -29,6 +30,7 @@ async function getStrapiData(path: string) {
     const data = await response.json();
     const flattenData = flattenAttributes(data);
     // console.dir(flattenData, { depth: null });
+
     return flattenData;
   } catch (error) {
     console.error(error);
