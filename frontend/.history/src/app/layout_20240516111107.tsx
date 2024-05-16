@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata(): Promise<Metadata> {
   const metadata = await getGlobalPageMetadata();
+  console.log(metadata);
 
   return {
     title: metadata?.title,

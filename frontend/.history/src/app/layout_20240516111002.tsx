@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata(): Promise<Metadata> {
   const metadata = await getGlobalPageMetadata();
+  console.log(metadata);
 
   return {
     title: metadata?.title,
@@ -23,6 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const globalData = await getGlobalData();
+  // console.log(globalData);
   return (
     <html lang='en'>
       <body className={inter.className}>

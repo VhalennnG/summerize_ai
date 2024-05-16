@@ -1,6 +1,8 @@
 import { FeatureSection } from "@/components/custom/FeatureSection";
 import { HeroSection } from "@/components/custom/HeroSection";
 import { getHomePageData } from "@/data/loader";
+import { flattenAttributes, getStrapiURL } from "@/lib/utils";
+import qs from "qs";
 
 function blockRenderer(block: any) {
   switch (block.__component) {
