@@ -2,10 +2,11 @@
 import { z } from "zod";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
 import {
   registerUserService,
   loginUserService,
-} from "../services/auth-services";
+} from "@/data/services/auth-service";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -38,7 +39,8 @@ export async function registerUserAction(prevState: any, formData: FormData) {
     return {
       ...prevState,
       zodErrors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing FieldS. Failed to Register",
+      strapiErrors: null,
+      message: "Missing Fields. Failed to Register.",
     };
   }
 
@@ -125,6 +127,6 @@ export async function loginUserAction(prevState: any, formData: FormData) {
 }
 
 export async function logoutAction() {
-  cookies().set("jwt", "", { ...config, maxAge: 0 }); // clear cookies
-  redirect("/"); // clear cookies
+  cookies().set("jwt", "", { ...config, maxAge: 0 });
+  redirect("/");
 }

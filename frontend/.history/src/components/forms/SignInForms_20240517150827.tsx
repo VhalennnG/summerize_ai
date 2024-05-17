@@ -26,7 +26,7 @@ const INITIAL_STATE = {
   message: null,
 };
 
-export function SignInForm() {
+export function SigninForm() {
   const [formState, formAction] = useFormState(loginUserAction, INITIAL_STATE);
 
   return (
