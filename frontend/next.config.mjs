@@ -12,6 +12,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "placehold.co",
       },
+      {
+        protocol: "https",
+        hostname: "https://artistic-dance-8e009fa85a.media.strapiapp.com",
+      },
     ],
   },
 };
