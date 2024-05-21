@@ -31,7 +31,7 @@ export async function HeroSection({ data }: Readonly<HeroSectionProps>) {
   const user = await getUserMeLoader();
 
   const linkUrl = user.ok ? "/dashboard" : link.url;
-  const text = user.ok ? "Go to Dashboard" : link.text;
+  const text = user.ok ? "Dashboard" : link.text;
 
   return (
     <header className='relative h-[600px] overflow-hidden'>

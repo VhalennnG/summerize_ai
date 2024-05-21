@@ -38,12 +38,6 @@ module.exports = {
       userRoutes[findUser].config.middlewares.push(isUserOwnerMiddleware);
     }
 
-    // Check if we found the find one route if so push our middleware on to that route
-    if (updateUser) {
-      initializeRoute(userRoutes, updateUser);
-      userRoutes[updateUser].config.middlewares.push(isUserCanUpdateMiddleware);
-    }
-
     // Should see the console log of our modified route
     console.log(userRoutes[findUser], "userRoutes[findUser]");
   },

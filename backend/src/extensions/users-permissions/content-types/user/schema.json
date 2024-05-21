@@ -77,6 +77,19 @@
     "credits": {
       "type": "integer",
       "default": 0
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "summaries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::summary.summary",
+      "mappedBy": "user"
     }
   }
 }

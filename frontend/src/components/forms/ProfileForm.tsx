@@ -6,7 +6,7 @@ import { SubmitButton } from "@/components/custom/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormState } from "react-dom";
-import { updateProfileAction } from "@/data/actions/profil-actions";
+import { updateProfileAction } from "@/data/actions/profile-actions";
 import { StrapiErrors } from "../custom/StrapiErrors";
 
 const INITIAL_STATE = {
@@ -28,6 +28,7 @@ interface ProfileFormProps {
 function CountBox({ text }: { readonly text: number }) {
   const style = "font-bold text-md mx-1";
   const color = text > 0 ? "text-primary" : "text-red-500";
+
   return (
     <div className='flex items-center justify-center h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none'>
       You have<span className={cn(style, color)}>{text}</span>credit(s)

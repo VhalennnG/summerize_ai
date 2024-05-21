@@ -1,4 +1,6 @@
 import qs from "qs";
+
+import { getAuthToken } from "./services/get-token";
 import { unstable_noStore as noStore } from "next/cache";
 import { flattenAttributes, getStrapiURL } from "@/lib/utils";
 
@@ -6,7 +8,8 @@ const baseUrl = getStrapiURL();
 
 async function fetchData(url: string) {
   noStore();
-  const authToken = null; // we will implement this later getAuthToken() later
+  const authToken = await getAuthToken();
+
   const headers = {
     method: "GET",
     headers: {
@@ -21,7 +24,7 @@ async function fetchData(url: string) {
     return flattenAttributes(data);
   } catch (error) {
     console.error("Error fetching data:", error);
-    throw error; // or return null;
+    throw error;
   }
 }
 
@@ -75,4 +78,33 @@ export async function getGlobalPageMetadata() {
   });
 
   return await fetchData(url.href);
+}
+
+export async function getSummaries(queryString: string, currentPage: number) {
+  const PAGE_SIZE = 4;
+
+  const query = qs.stringify({
+    sort: ["createdAt:desc"],
+    filters: {
+      $or: [
+        { title: { $containsi: queryString } },
+        { summary: { $containsi: queryString } },
+      ],
+    },
+    pagination: {
+      pageSize: PAGE_SIZE,
+      page: currentPage,
+    },
+  });
+
+  const url = new URL("/api/summaries", baseUrl);
+  url.search = query;
+  return fetchData(url.href);
+}
+
+export async function getSummaryById(summaryId: string) {
+  const url = new URL(`${baseUrl}/api/summaries/${summaryId}`);
+  console.log(url.href);
+
+  return fetchData(`${baseUrl}/api/summaries/${summaryId}`);
 }
